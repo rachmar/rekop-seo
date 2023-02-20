@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.dashboard')
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
@@ -196,7 +196,7 @@
         </div>
         <p class="text-muted">Sales are activities related to selling or the number of goods or services sold in a given time period.</p>
         <div id="monthlySalesChart"></div>
-      </div> 
+      </div>
     </div>
   </div>
   <div class="col-lg-5 col-xl-4 grid-margin stretch-card">
@@ -415,7 +415,7 @@
             </tbody>
           </table>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div> <!-- row -->
