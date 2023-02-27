@@ -22,6 +22,14 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['middleware' => ['auth']], function () 
+{   
+    Route::group(['as'=>'client.', 'prefix'=>'client', 'namespace'=> 'Client', 'role' => 'CLIENT'], function()
+    {
+        Route::resource('inquiries', 'InquiryController');
+    });
+});
+
 // Route::get('/', function () {
 //     return view('dashboard');
 // });

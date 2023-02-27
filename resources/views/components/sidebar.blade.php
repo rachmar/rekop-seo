@@ -26,7 +26,7 @@
         </a>
       </li>
       <li class="nav-item {{ active_class(['inquiries/']) }}">
-        <a href="{{ url('/') }}" class="nav-link">
+        <a href="{{ route('client.inquiries.index') }}" class="nav-link">
           <i class="link-icon" data-feather="file-text"></i>
           <span class="link-title">Inquiries</span>
         </a>
