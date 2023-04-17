@@ -13,20 +13,27 @@
     <ul class="nav">
 
       <li class="nav-item nav-category">Menu</li>
-      <li class="nav-item {{ active_class(['/']) }}">
-        <a href="{{ url('/') }}" class="nav-link">
+      <li class="nav-item {{ active_class('home') }}">
+        <a href="{{ route('home') }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['reputation/']) }}">
-        <a href="{{ url('/') }}" class="nav-link">
-          <i class="link-icon" data-feather="codesandbox"></i>
-          <span class="link-title">Reputation</span>
+      <li class="nav-item {{ active_class('client.phone-trackings.*') }}">
+        <a href="{{ route('client.phone-trackings.index') }}" class="nav-link">
+          <i class="link-icon" data-feather="phone"></i>
+          <span class="link-title">Phone Trackings</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['inquiries/']) }}">
-        <a href="{{ route('client.inquiries.index') }}" class="nav-link">
+      <li class="nav-item {{ active_class('client.system-settings.*') }}">
+        <a href="{{ route('client.system-settings.index') }}" class="nav-link">
+          <i class="link-icon" data-feather="settings"></i>
+          <span class="link-title">System Settings</span>
+        </a>
+      </li>
+
+      <!-- <li class="nav-item {{ active_class(['inquiries/']) }}">
+        <a href="#" class="nav-link">
           <i class="link-icon" data-feather="file-text"></i>
           <span class="link-title">Inquiries</span>
         </a>
@@ -49,7 +56,6 @@
           <span class="link-title">Resources</span>
         </a>
       </li>
-
       <li class="nav-item nav-category">Reporting</li>
       <li class="nav-item {{ active_class(['billing/']) }}">
         <a href="{{ url('/') }}" class="nav-link">
@@ -75,7 +81,6 @@
           <span class="link-title">Lead Generation</span>
         </a>
       </li>
-
       <li class="nav-item nav-category">Promoter</li>
       <li class="nav-item {{ active_class(['billing/']) }}">
         <a href="{{ url('/') }}" class="nav-link">
@@ -89,8 +94,6 @@
           <span class="link-title">Managements</span>
         </a>
       </li>
-
-
       <li class="nav-item nav-category">Settings</li>
       <li class="nav-item {{ active_class(['billing/']) }}">
         <a href="{{ url('/') }}" class="nav-link">
@@ -109,7 +112,7 @@
           <i class="link-icon" data-feather="mail"></i>
           <span class="link-title">Contact Us</span>
         </a>
-      </li>
+      </li> -->
 
     </ul>
   </div>

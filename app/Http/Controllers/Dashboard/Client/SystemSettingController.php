@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Dashboard\Client;
 
 use App\Http\Controllers\Controller;
-use App\SEO\SignalWire;
+
 use Illuminate\Http\Request;
 
-class InquiryController extends Controller
+use App\SEO\SignalWire;
+
+class SystemSettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,7 @@ class InquiryController extends Controller
      */
     public function index(Request $request)
     {   
-        $calls = SignalWire::getVoiceLogs();
-        return view('client.inquiry.index', compact('calls'));
+        return view('client.system-settings.index');
     }
 
     /**
@@ -48,7 +49,7 @@ class InquiryController extends Controller
      */
     public function show($id)
     {
-       
+
     }
 
     /**
@@ -59,7 +60,7 @@ class InquiryController extends Controller
      */
     public function edit($id)
     {
-        //
+       
     }
 
     /**

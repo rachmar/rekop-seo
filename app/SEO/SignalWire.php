@@ -6,82 +6,36 @@ use Exception;
 
 class SignalWire
 {   
-    public $apiKeys = [
-        ''
-    ];
-
-    public static function getVoiceLogs()
+    public static function call(string $endpoint, string $method = 'GET', array $postData = [])
     {
-        $url = 'https://riztheseowiz.signalwire.com/api/voice/logs?created_after=2023-01-27&page_size=1000';
-        $token = 'MzQxYzg5ZmUtMjRmMC00MjY1LThjMWYtYmE5OTNiMjc3ZDBjOlBUNTgxNWJhMmFkMWZkYjRjYmZkNTljNWE1ZmU1YzMwOGI3MjFkMzczMjMxNzU3YWJj';
-
-        $response = self::curl($url, $token);
-        $response['summary'] = self::getVoiceSummary($response);
-
-        return $response;
-    }
-
-    public static function getVoiceSummary(array $calls)
-    {   
-        $summary = [
-            'outbound' => 0,
-            'inbound' => 0,
-            'call_completed' => 0,
-            'call_no_answer' => 0,
-            'charge' => 0,
-            'total_calls' => 0,
-        ];
-
-        foreach ($calls['data'] as $call) {
-
-            if (isset($call['direction']) &&  $call['direction'] == 'outbound-dial') {
-                $summary['outbound'] += 1;
-            }
-
-            if (isset($call['direction']) &&  $call['direction'] == 'inbound') {
-                $summary['inbound'] += 1;
-            }
-
-            if (isset($call['status']) &&  $call['status'] == 'no-answer') {
-                $summary['call_completed'] += 1;
-            }
-
-            if (isset($call['status']) &&  $call['status'] == 'completed') {
-                $summary['call_no_answer'] += 1;
-            }
-
-            if (isset($call['charge']) &&  $call['charge'] > 0) {
-                $summary['charge'] += $call['charge'];
-            }
-        }
-
-        $summary['total_calls'] = count($calls['data']);
-
-        return $summary;
-    }
-
-    public static function curl($url, $token)
-    {
-        $ch = curl_init();
-
         $headers = [
             'Accept: application/json',
-            'Authorization: Basic '.$token,
+            'Content-Type: application/json',
         ];
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        
-        $response = curl_exec($ch);
+        $curl = curl_init();
 
-        if ( curl_errno($ch) ) {
-            throw new Exception('Signal Wire Error: '.curl_error($ch) );
+        $url = 'https://'.env('SIGNAL_WIRE_SPACE').$endpoint;
+        $authToken =  env('SIGNAL_WIRE_PROJECT').':'.env('SIGNAL_WIRE_TOKEN');
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_USERPWD, $authToken);
+
+        if (count($postData) > 0) {
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($postData));
         }
 
-        curl_close($ch);
+        $response = curl_exec($curl);
 
+        curl_close($curl);
+
+        if ( curl_errno($curl) ) {
+            throw new Exception('Signal Wire Error: '.curl_error($curl) );
+        }
+        
         return json_decode($response, true);
     }
     
