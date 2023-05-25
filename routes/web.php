@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function ()
 {   
     Route::group(['as'=>'client.', 'prefix'=>'client', 'namespace'=> 'Client', 'role' => 'CLIENT'], function()
     {
+        Route::resource('projects', 'ProjectController');
         Route::resource('phone-trackings', 'PhoneTrackingController');
         Route::resource('system-settings', 'SystemSettingController');
     });

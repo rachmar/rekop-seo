@@ -16,6 +16,7 @@
       <link href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
       <link href="{{ asset('assets/plugins/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet" />
       <link href="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
+      <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
       @stack('plugin-styles')
       <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
       @stack('styles')
@@ -35,6 +36,7 @@
       <script src="{{ asset('js/app.js') }}"></script>
       <script src="{{ asset('assets/plugins/feather-icons/feather.min.js') }}"></script>
       <script src="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+      <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
       @stack('plugin-scripts')
       <script src="{{ asset('assets/js/template.js') }}"></script>
       @stack('scripts')
